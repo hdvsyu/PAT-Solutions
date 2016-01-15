@@ -1,4 +1,4 @@
-package pat1008;
+package advancedLevelpat1008;
 
 import java.util.Scanner;
 
