@@ -1,4 +1,4 @@
-package pat1005;
+package advancedLevelpat1005;
 
 import java.util.Scanner;
 import java.util.Stack;
