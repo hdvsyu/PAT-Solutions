@@ -1,4 +1,4 @@
-package pat1042;
+package basicLevel1042;
 
 import java.util.Scanner;
 
