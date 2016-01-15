@@ -1,4 +1,4 @@
-package pat1100;
+package advancedLevelpat1100;
 
 import java.util.HashMap;
 import java.util.InputMismatchException;
