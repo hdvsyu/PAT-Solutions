@@ -1,4 +1,4 @@
-package pat1022;
+package advancedLevelpat1022;
 
 import java.util.Scanner;
 import java.util.Set;
