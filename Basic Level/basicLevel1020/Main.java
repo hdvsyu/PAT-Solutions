@@ -1,8 +1,9 @@
 package basicLevel1020;
 
-//errors
-import java.util.Arrays;
+// please use c plus plus.
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Main {
 
@@ -10,34 +11,40 @@ public class Main {
 
 		Scanner in = new Scanner(System.in);
 
-		int n = in.nextInt();
-		int d = in.nextInt();
-		int m = 0;
+		int n = in.nextInt();	// n表示月饼的种类数
+		int d = in.nextInt();	// d表示市场最大需求量
+		int m = 0;	// m为所有月饼的库存量
+		
 		double p = 0;
+		
+		
 		MoonCake[] moonCakes = new MoonCake[n];
+		// 读取每种月饼的库存量
 		for (int i = 0; i < n; i++) {
 			moonCakes[i] = new MoonCake();
-			moonCakes[i].memoryTotal = in.nextInt();
+			moonCakes[i].memoryTotal = in.nextDouble();
 			m += moonCakes[i].memoryTotal;
 		}
 
+		Set<MoonCake> set = new TreeSet<>();
+		// 读取每种月饼的总售价，并求出单个月饼的售价
 		for (int i = 0; i < n; i++) {
-			moonCakes[i].saleTotal = in.nextInt();
+			moonCakes[i].saleTotal = in.nextDouble();
 			p += moonCakes[i].saleTotal;
-			moonCakes[i].pricePeer = moonCakes[i].saleTotal * 1.0 / moonCakes[i].memoryTotal;
+			moonCakes[i].pricePeer = moonCakes[i].saleTotal / moonCakes[i].memoryTotal;
+			set.add(moonCakes[i]);
 		}
 		in.close();
 
 		if (m >= d) {
-			Arrays.sort(moonCakes);
-
+			
 			double total = 0;
-			for (int i = 0; i < n; i++) {
-				if (d - moonCakes[i].memoryTotal >= 0) {
-					total += moonCakes[i].saleTotal;
-					d -= moonCakes[i].saleTotal;
+			for (MoonCake moonCake : set) {
+				if (d - moonCake.memoryTotal >= 0) {
+					total += moonCake.saleTotal;
+					d -= moonCake.memoryTotal;
 				} else {
-					total += moonCakes[i].pricePeer * d;
+					total += moonCake.pricePeer * d;
 					break;
 				}
 			}
@@ -51,8 +58,8 @@ public class Main {
 }
 
 class MoonCake implements Comparable<MoonCake> {
-	int memoryTotal;
-	int saleTotal;
+	double memoryTotal;
+	double saleTotal;
 	double pricePeer;
 
 	@Override
