@@ -1,5 +1,5 @@
 package basicLevel1034;
-//two test point failure.
+
 import java.util.Scanner;
 
 public class Main {
@@ -9,10 +9,10 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 		String[] input = in.nextLine().split("[\\s/]");
 		in.close();
-		int a1 = Integer.parseInt(input[0]);
-		int b1 = Integer.parseInt(input[1]);
-		int a2 = Integer.parseInt(input[2]);
-		int b2 = Integer.parseInt(input[3]);
+		long a1 = Integer.parseInt(input[0]);
+		long b1 = Integer.parseInt(input[1]);
+		long a2 = Integer.parseInt(input[2]);
+		long b2 = Integer.parseInt(input[3]);
 
 		if (b1 != 0 && b2 != 0) {
 			add(a1, b1, a2, b2);
@@ -22,7 +22,7 @@ public class Main {
 		}
 	}
 
-	public static void tackle(int a, int b) {
+	public static void tackle(long a, long b) {
 		if (a == 0) {
 			System.out.print(0);
 			return;
@@ -34,7 +34,7 @@ public class Main {
 			a = -a;
 		}
 
-		int gcd = getGcd(a, b);
+		long gcd = getGcd(a, b);
 		a = a / gcd;
 		b = b / gcd;
 		if (a % b == 0) {
@@ -53,7 +53,7 @@ public class Main {
 
 	}
 
-	public static void divide(int a1, int b1, int a2, int b2) {
+	public static void divide(long a1, long b1, long a2, long b2) {
 		tackle(a1, b1);
 		System.out.print(" / ");
 		tackle(a2, b2);
@@ -67,7 +67,7 @@ public class Main {
 		}
 	}
 	
-	public static void mutilply(int a1, int b1, int a2, int b2) {
+	public static void mutilply(long a1, long b1, long a2, long b2) {
 		tackle(a1, b1);
 		System.out.print(" * ");
 		tackle(a2, b2);
@@ -76,7 +76,7 @@ public class Main {
 		System.out.println();
 	}
 	
-	public static void minus(int a1, int b1, int a2, int b2) {
+	public static void minus(long a1, long b1, long a2, long b2) {
 		tackle(a1, b1);
 		System.out.print(" - ");
 		tackle(a2, b2);
@@ -85,7 +85,7 @@ public class Main {
 		System.out.println();
 	}
 
-	public static void add(int a1, int b1, int a2, int b2) {
+	public static void add(long a1, long b1, long a2, long b2) {
 		tackle(a1, b1);
 		System.out.print(" + ");
 		tackle(a2, b2);
@@ -94,9 +94,9 @@ public class Main {
 		System.out.println();
 	}
 
-	public static int getGcd(int a, int b) {
+	public static long getGcd(long a, long b) {
 		while (a % b != 0) {
-			int temp = a % b;
+			long temp = a % b;
 			a = b;
 			b = temp;
 		}
