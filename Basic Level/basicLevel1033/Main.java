@@ -1,6 +1,7 @@
 package basicLevel1033;
 
 // 测试点4错误
+// 可以使用C++
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
