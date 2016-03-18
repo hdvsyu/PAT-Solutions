@@ -1,6 +1,5 @@
 package basicLevel1024;
 
-//errors
 import java.util.Scanner;
 
 public class Main {
@@ -11,27 +10,44 @@ public class Main {
 		String[] sci = in.nextLine().split("[.E]");
 		in.close();
 
-		if (sci[0].charAt(0) == '-') {
-			System.out.print("-");
-		}
-
-		if (sci[2].charAt(0) == '-') {
-			int cnt = Integer.parseInt(sci[2].substring(1));
-			if (cnt > 1) {
-				System.out.print("0.");
-				for (int i = 1; i < cnt; i++) {
-					System.out.print("0");
+		int eff = Integer.parseInt(sci[0]);
+		int pow = Integer.parseInt(sci[2]);
+		if (pow >= 0) {
+			System.out.print(eff);
+			
+			boolean havePoint = true;
+			if (sci[1].length() <= pow) {
+				havePoint = false;
+			}
+			int i = 0;
+			for (i = 0; i < sci[1].length() && pow != 0; i++, pow--) {
+				System.out.print(sci[1].charAt(i));
+			}
+			
+			if (havePoint) {
+				System.out.print(".");
+				for (; i < sci[1].length(); i++) {
+					System.out.print(sci[1].charAt(i));
 				}
 			}
-			System.out.print(sci[0].substring(1) + sci[1]);
+			
+			while (pow != 0) {
+				System.out.print("0");
+				pow--;
+			}
+			
 		} else {
-			// sci[2].charAt(0) == '+'
-			int cnt = Integer.parseInt(sci[2].substring(1));
-			System.out.print(sci[0].substring(1) + sci[1]);
-			cnt = cnt - sci[2].length();
-			for (int i = 0; i <= cnt; i++) {
+			if (eff < 0) {
+				System.out.print("-");
+				eff = -eff;
+			}
+			
+			System.out.print("0.");
+			for (int i = 1; i < Math.abs(pow); i++) {
 				System.out.print("0");
 			}
+			System.out.print(eff);
+			System.out.print(sci[1]);
 		}
 	}
 
