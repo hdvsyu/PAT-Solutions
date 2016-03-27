@@ -1,34 +1,28 @@
 package basicLevel1027;
 
-//have two point failure.
-//i am so tired.
 import java.util.Scanner;
 
 public class Main {
-
 	public static void main(String[] args) {
-
 		Scanner in = new Scanner(System.in);
-		int total = in.nextInt();
-		String s = in.next();
+		int n = in.nextInt();
+		char c = in.next().charAt(0);
 		in.close();
 
-		int cnt = 0;
-		int dimension = 2 * (int) Math.sqrt((total + 1) / 2) - 1;
-		for (int i = 0; i < dimension; i++) {
-			for (int j = 0; j < dimension; j++) {
-				if ((j >= i && j < dimension - i) || (j <= i && j >= dimension - i - 1)) {
-					cnt++;
-					System.out.print(s);
+		int w = (int) Math.sqrt((n + 1) / 2);
+		for (int i = 0; i < 2 * w - 1; i++) {
+			for (int j = 0; j < 2 * w - 1; j++) {
+				if ((i > j && i + j < 2 * w - 2) || (i < j && i + j > 2 * w - 2)) {
+					if (i > j && i + j < 2 * w - 2)
+						System.out.print(" ");
 				} else {
-					System.out.print(" ");
+					System.out.print(c);
 				}
 			}
 
 			System.out.println();
 		}
-
-		System.out.println(total - cnt);
+		
+		System.out.println(n - 2 * w * w + 1);
 	}
-
 }
