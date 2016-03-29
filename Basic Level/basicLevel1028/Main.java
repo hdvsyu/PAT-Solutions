@@ -1,9 +1,6 @@
 package basicLevel1028;
 
-//errors
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+// 测试点4运行超时
 import java.util.Scanner;
 
 public class Main {
@@ -12,30 +9,25 @@ public class Main {
 
 		Scanner in = new Scanner(System.in);
 		int n = in.nextInt();
-		People[] peoples = new People[n];
-		List<People> list = new ArrayList<>();
+		People max = new People("", "2014/09/06");
+		People min = new People("", "1814/09/06");
+		int isValid = 0;
 		for (int i = 0; i < n; i++) {
-			peoples[i] = new People(in.next(), in.next());
-			if (peoples[i].isVaild) {
-				list.add(peoples[i]);
+			People p = new People(in.next(), in.next());
+			if (p.isVaild) {
+				max = max.compareTo(p) > 0 ? max : p;
+				min = min.compareTo(p) < 0 ? min : p;
+				isValid++;
 			}
+			
 		}
 		in.close();
 
-		System.out.print(list.size() + " ");
-
-		Arrays.sort(peoples);
-		int i = n-1;
-		while (!peoples[i].isVaild) {
-			i--;
+		if (isValid == 0) {
+			System.out.println(0);
+		} else {
+			System.out.println(isValid + " " + max.name + " " + min.name);
 		}
-		System.out.print(peoples[i].name + " ");
-		
-		i = 0;
-		while (!peoples[i].isVaild) {
-			i++;
-		}
-		System.out.print(peoples[i].name);
 	}
 
 }
