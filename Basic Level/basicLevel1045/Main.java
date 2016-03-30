@@ -1,6 +1,7 @@
 package basicLevel1045;
-
+// 只过了第一个测试点
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,29 +10,27 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 		int n = in.nextInt();
 		int[] array = new int[n];
+        int[] copy = new int[n];
 		for (int i = 0; i < n; i++) {
 			array[i] = in.nextInt();
+            copy[i] = array[i];
 		}
 		in.close();
 
-		int[] min = new int[n];
-		min[0] = 0;
-		for (int i = 1; i < n; i++) {
-			min[i] = min[i - 1] < array[i - 1] ? min[i - 1] : array[i - 1];
-		}
+		Arrays.sort(copy);
 
-		int[] max = new int[n];
-		max[n - 1] = Integer.MAX_VALUE;
-		for (int i = n - 2; i >= 0; i--) {
-			max[i] = max[i + 1] > array[i + 1] ? max[i + 1] : array[i + 1];
-		}
+        List<Integer> list = new ArrayList<>();
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (copy[i] == array[i] && copy[i] > max) {
+                list.add(copy[i]);
+            }
 
-		List<Integer> list = new ArrayList<>();
-		for (int i = 0; i < n; i++) {
-			if (array[i] > min[i] && array[i] < max[i]) {
-				list.add(array[i]);
-			}
-		}
+            if (array[i] > max) {
+                max = array[i];
+            }
+
+        }
 
 		System.out.println(list.size());
 		System.out.print(list.get(0));
