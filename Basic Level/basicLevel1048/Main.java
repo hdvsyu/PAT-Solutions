@@ -15,16 +15,13 @@ public class Main {
 		int i = a.length() - 1;
 		int j = b.length() - 1;
 
-		// 让A和B的长度相等
 		if (i > j) {
-			// A比B长
 			int c = i - j;
 			while (c != 0) {
 				b = "0" + b;
 				c--;
 			}
 		} else if (i < j) {
-			// B比A长
 			int c = j - i;
 			while (c != 0) {
 				a = "0" + a;
@@ -37,7 +34,6 @@ public class Main {
 		Stack<String> stack = new Stack<>();
 		while (index >= 0) {
 			if (isOdd) {
-				// 奇数位
 				isOdd = false;
 				int cNumber = a.charAt(index) - '0' + b.charAt(index) - '0';
 				String r = null;
@@ -50,6 +46,7 @@ public class Main {
 					break;
 				case 12:
 					r = "K";
+					break;
 				default:
 					r = "" + cNumber % 13;
 					break;
@@ -57,10 +54,10 @@ public class Main {
 				
 				stack.push(r);
 			} else {
-				// 偶数位
 				isOdd = true;
-				int cNumber = (b.charAt(index) - '0' - a.charAt(index) + '0' + 10) % 10;
+				int cNumber = (b.charAt(index)  - a.charAt(index) + 10) % 10;
 				String r = "" + cNumber;
+				
 				stack.push(r);
 			}
 			
