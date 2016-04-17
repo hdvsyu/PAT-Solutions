@@ -1,5 +1,5 @@
 package basicLevel1055;
-
+// 测试点3,4,5超时
 import java.util.Arrays;
 import java.util.Scanner;
 
