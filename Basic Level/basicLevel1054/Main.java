@@ -19,7 +19,7 @@ public class Main {
 				if (x > 1000 || x < -1000 || Math.abs(temp - x) >= 0.001) {
 					throw new NumberFormatException();
 				}
-				
+
 				cnt++;
 				y += x;
 			} catch (NumberFormatException e) {
