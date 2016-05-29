@@ -1,4 +1,4 @@
-package advancedLevelpat1006;
+package advancedLevel1006;
 
 import java.util.Arrays;
 import java.util.Comparator;
