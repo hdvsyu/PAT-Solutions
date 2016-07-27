@@ -1,4 +1,4 @@
-package advancedLevelpat1015;
+package advancedLevel1015;
 
 import java.util.Scanner;
 
