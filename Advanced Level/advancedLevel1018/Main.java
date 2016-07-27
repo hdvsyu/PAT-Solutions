@@ -1,4 +1,4 @@
-package advancedLevelpat1018;
+package advancedLevel1018;
 
 public class Main {
 
