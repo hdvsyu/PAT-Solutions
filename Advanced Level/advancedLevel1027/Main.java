@@ -1,4 +1,4 @@
-package advancedLevelpat1027;
+package advancedLevel1027;
 
 // 将10进制转换为13进制
 import java.util.Scanner;
