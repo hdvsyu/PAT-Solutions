@@ -1,7 +1,6 @@
-package advancedLevelpat1084;
+package advancedLevel1084;
 
-
-// 分别用两个指针指向original字符串和typed out字符串，然后比较两个指针指向的字符是否相等，这里要注意判断边界条件。
+// 分别用两个指针指向original字符串和typedOut字符串，然后比较两个指针指向的字符是否相等，这里要注意判断边界条件。
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -15,7 +14,7 @@ public class Main {
 		Set<Character> set = new HashSet<>();
 		int i = 0, j = 0;
 		while (i != original.length() || j != typedOut.length()) {
-			
+
 			if (j == typedOut.length()) {
 				for (; i != original.length(); i++) {
 					if (!set.contains(original.charAt(i))) {
@@ -25,8 +24,7 @@ public class Main {
 				}
 				break;
 			}
-			
-			
+
 			if (original.charAt(i) != typedOut.charAt(j)) {
 				if (!set.contains(original.charAt(i))) {
 					System.out.print(original.charAt(i));
