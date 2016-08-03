@@ -1,45 +1,41 @@
 package advancedLevel1007;
-//have errors.
+
 import java.util.Scanner;
-
 public class Main {
-
 	public static void main(String[] args) {
-
 		Scanner in = new Scanner(System.in);
-		
 		int n = in.nextInt();
-		int[] number = new int[n];
-		boolean isAllMinus = true;
+		int[] nums = new int[n];
 		for (int i = 0; i < n; i++) {
-			number[i] = in.nextInt();
-			if (isAllMinus && number[i] >= 0) {
-				isAllMinus = false;
-			}
+			nums[i] = in.nextInt();
 		}
 		in.close();
-		
-		if (isAllMinus) {
-			System.out.println(0 + "" + number[0] + ""  +  number[n-1]);
-			return;
-		}
-		int maxSum = 0;
-		int first = 0, end = 0;
-		int tempSum = 0;
-		int tempFirst = 0;
+	
+		int maxSum = -1, left = 0, right = 0, tempSum = 0, tempLeft = 0;
 		for (int i = 0; i < n; i++) {
-			tempSum += number[i];
+			tempSum += nums[i];
 			if (tempSum > maxSum) {
 				maxSum = tempSum;
-				first = tempFirst;
-				end = i;
+				left = tempLeft;
+				right = i;
 			} else if (tempSum < 0) {
 				tempSum = 0;
-				tempFirst = i+1;
+				tempLeft = i+1;
 			}
 		}
-		
-		System.out.print(maxSum + " " + first + " " + end);
+		if (havePositive(nums)) {
+			System.out.print(maxSum + " " + nums[left] + " " + nums[right]);
+		} else {
+			System.out.println("0 "+ nums[0] + " " + nums[n - 1]);
+		}
 	}
 
+	public static boolean havePositive(int[] nums) {
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] > 0) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
