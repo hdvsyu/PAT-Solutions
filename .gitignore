@@ -5,3 +5,4 @@
 .idea/compiler.xml
 *.xml
 PAT.iml
+*.class
