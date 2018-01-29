@@ -1,17 +1,26 @@
 package basicLevel1017;
 
-import java.math.BigInteger;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-
-	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-
-		BigInteger a = new BigInteger(in.next());
-		BigInteger b = new BigInteger(in.next());
-
-		System.out.print(a.divide(b) + " " + a.mod(b));
-		in.close();
-	}
+  public static void main(String[] args) throws IOException {
+    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    String[] ab = bufferedReader.readLine().split(" ");
+    bufferedReader.close();
+    int b = Integer.parseInt(ab[1]), t = 0;
+    StringBuilder stringBuffer = new StringBuilder();
+    for (int i = 0; i < ab[0].length(); i++) {
+      t = t * 10 + ab[0].charAt(i) - '0';
+      stringBuffer.append((char)(t / b + '0'));
+      t = t % b;
+    }
+    String result = stringBuffer.toString();
+    if (result.charAt(0) == '0'  && result.length() != 1) {
+      System.out.print(result.substring(1) + " " + t);
+    } else {
+      System.out.print(result + " " + t);
+    }
+  }
 }
