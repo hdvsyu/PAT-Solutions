@@ -2,4 +2,4 @@ PAT Practise (中文)真题[https://www.patest.cn/contests/](https://www.patest.
 
 
 
-[GPLT电子笔记](GPLT/README.md#readme)
+[GPLT电子笔记](GPLT#readme)
