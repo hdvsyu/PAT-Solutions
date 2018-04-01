@@ -1,36 +1,23 @@
 #include <cstdio>
 
-bool havePositive(int *nums, int k) {
-    for (int i = 0; i < k; i++) {
-        if (nums[i] >= 0) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
 int main() {
-    int k = 0;
+    int k = 0, sum = -1, tsum = 0, start = 0, tstart = 0, end = 0, all_neg = 1;
     scanf("%d", &k);
-    int sum = -1, current = 0, currentI = 0, indexI = 0, indexJ = 0;
-    int *nums = new int[k];
+    int *num = new int[k];
     for (int i = 0; i < k; i++) {
-        scanf("%d", &nums[i]);
-        current += nums[i];
-        if (current > sum) {
-            sum = current;
-            indexI = currentI;
-            indexJ = i;
-        } else if (current < 0){
-            current = 0;
-            currentI = i + 1;
+        scanf("%d", &num[i]);
+        if (num[i] >= 0) all_neg = 0;
+        tsum += num[i];
+        if (tsum < 0) {
+            tsum = 0;
+            tstart = i+1;
+        } else if (tsum > sum) {
+            sum = tsum;
+            end = i;
+            start = tstart;
         }
     }
-    if (havePositive(nums, k)) {
-        printf("%d %d %d\n", sum, nums[indexI], nums[indexJ]);
-    } else {
-        printf("0 %d %d\n", nums[0], nums[k - 1]);
-    }
-    delete [] nums;
+    if (all_neg) printf("0 %d %d", num[0], num[k-1]);
+    else printf("%d %d %d", sum, num[start], num[end]);
     return 0;
 }
