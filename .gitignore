@@ -6,3 +6,5 @@
 *.xml
 PAT.iml
 *.class
+.DS_Store
+
