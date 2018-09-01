@@ -1,14 +1,12 @@
 #include <cstdio>
 #include <vector>
 
-using namespace std;
-
 int main () {
     int n = 0, b = 0;
     scanf("%d %d", &n, &b);
-    vector<int> v;
+    std::vector<int> v;
     do {
-       v.push_back(n % b);
+        v.push_back(n % b);
         n /= b;
     } while (n != 0);
     bool equal = true;
@@ -18,9 +16,9 @@ int main () {
         }
     }
     printf("%s\n", equal ? "Yes" : "No");
-    printf("%d", v[v.size() - 1]);
-    for (int i = v.size() - 2; i >= 0; i--) {
-        printf(" %d", v[i]);
+    for (auto it = v.rbegin(); it != v.rend(); it++) {
+        if (it == v.rbegin()) printf("%d", *it);
+        else printf(" %d", *it);
     }
     return 0;
 }
