@@ -1,50 +1,33 @@
 #include <cstdio>
 #include <cstring>
-#include <cstdlib>
+#include <algorithm>
+#include <map>
+#include <string>
 
-struct Student {
+using namespace std;
+
+struct student {
     char id[7];
-    int score[4];
-    int rank[4];
+    int score[4], rank[4];
 };
 
-int cmp0 (const void *a, const void *b) {
-    struct Student arg1 = *static_cast<const struct Student *>(a);
-    struct Student arg2 = *static_cast<const struct Student *>(b);
-    
-    if (arg1.score[0] > arg2.score[0]) return -1;
-    if (arg1.score[0] < arg2.score[0]) return 1;
-    return 0;
+bool cmp_0(student a, student b) {
+    return a.score[0] > b.score[0];
 }
 
-int cmp1 (const void *a, const void *b) {
-    struct Student arg1 = *static_cast<const struct Student *>(a);
-    struct Student arg2 = *static_cast<const struct Student *>(b);
-    
-    if (arg1.score[1] > arg2.score[1]) return -1;
-    if (arg1.score[1] < arg2.score[1]) return 1;
-    return 0;
+bool cmp_1(student a, student b) {
+    return a.score[1] > b.score[1];
 }
 
-int cmp2 (const void *a, const void *b) {
-    struct Student arg1 = *static_cast<const struct Student *>(a);
-    struct Student arg2 = *static_cast<const struct Student *>(b);
-    
-    if (arg1.score[2] > arg2.score[2]) return -1;
-    if (arg1.score[2] < arg2.score[2]) return 1;
-    return 0;
+bool cmp_2(student a, student b) {
+    return a.score[2] > b.score[2];
 }
 
-int cmp3 (const void *a, const void *b) {
-    struct Student arg1 = *static_cast<const struct Student *>(a);
-    struct Student arg2 = *static_cast<const struct Student *>(b);
-    
-    if (arg1.score[3] > arg2.score[3]) return -1;
-    if (arg1.score[3] < arg2.score[3]) return 1;
-    return 0;
+bool cmp_3(student a, student b) {
+    return a.score[3] > b.score[3];
 }
 
-void printRank (struct Student s) {
+void print_rank (student s) {
     int rank = s.rank[0], index = 0;
     for (int i = 1; i <= 3; i++) {
         if (rank > s.rank[i]) {
@@ -68,14 +51,15 @@ void printRank (struct Student s) {
 int main () {
     int n = 0, m = 0;
     scanf("%d %d", &n, &m);
-    struct Student *students = new struct Student[n];
+    struct student *students = new struct student[n];
     for (int i = 0; i < n; i++) {
         scanf("%s %d %d %d", students[i].id, &students[i].score[1], &students[i].score[2], &students[i].score[3]);
         students[i].score[0] = (students[i].score[1] + students[i].score[2] + students[i].score[3]) / 3.0 + 0.5;
     }
     
-    // qsort by C Programming Language
-    qsort(students, n, sizeof(students[0]), cmp1);
+    
+    // sort by C Programming Language
+    sort(students, students + n, cmp_1);
     for (int i = 0; i < n; i++) {
         students[i].rank[1] = i + 1;
         if (i != 0 && students[i].score[1] == students[i - 1].score[1]) {
@@ -83,48 +67,43 @@ int main () {
         }
     }
     
-    // qsort by Mathematics
-    qsort(students, n, sizeof(students[0]), cmp2);
+    // sort by Mathematics
+    sort(students, students + n, cmp_2);
     for (int i = 0; i < n; i++) {
         students[i].rank[2] = i + 1;
-        if (i != 0 && students[i].score[2] == students[i - 1].score[2]) {
+        if (i > 0 && students[i].score[2] == students[i - 1].score[2]) {
             students[i].rank[2] = students[i - 1].rank[2];
         }
     }
     
-    // qsort by English
-    qsort(students, n, sizeof(students[0]), cmp3);
+    // sort by English
+    sort(students, students + n, cmp_3);
     for (int i = 0; i < n; i++) {
         students[i].rank[3] = i + 1;
-        if (i != 0 && students[i].score[3] == students[i - 1].score[3]) {
+        if (i > 0 && students[i].score[3] == students[i - 1].score[3]) {
             students[i].rank[3] = students[i - 1].rank[3];
         }
     }
     
-    // qsort by Average
-    qsort(students, n, sizeof(students[0]), cmp0);
+    // sort by Average
+    sort(students, students + n, cmp_0);
+    map<string, int> position;
     for (int i = 0; i < n; i++) {
+        position[students[i].id] = i + 1;
         students[i].rank[0] = i + 1;
-        if (i != 0 && students[i].score[0] == students[i - 1].score[0]) {
+        if (i > 0 && students[i].score[0] == students[i - 1].score[0]) {
             students[i].rank[0] = students[i - 1].rank[0];
         }
     }
     
-    
     for (int i = 0; i < m; i++) {
         char id[7];
         scanf("%s", id);
-        bool state = true;
-        for (int j = 0; j < n; j++) {
-            if (strcmp(students[j].id, id) == 0) {
-                printRank(students[j]);
-                state = false;
-                break;
-            } else {
-                
-            }
+        if (position[id] == 0) {
+            printf("N/A\n");
+        } else {
+            print_rank(students[position[id] - 1]);
         }
-        if (state) printf("N/A\n");
     }
     delete [] students;
     return 0;
