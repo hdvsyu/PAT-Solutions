@@ -1,62 +1,59 @@
 #include <string>
 #include <iostream>
-#include <cstdio>
+#include <map>
+#include <set>
 
 using namespace std;
 
-struct Book {
-    string keywords, title, author, publisher, id, year;
-};
-
-int cmp (const void *a, const void *b) {
-    struct Book arg1 = *static_cast<const struct Book *>(a);
-    struct Book arg2 = *static_cast<const struct Book *>(b);
-    
-    if (arg1.id < arg2.id) return -1;
-    if (arg1.id > arg2.id) return 1;
-    return 0;
-}
-
-void query (const struct Book *books, int k, int n) {
-    string str;
-    getline(cin, str);
-    cout << k << ": " << str << endl;
-    bool out = false;
-    for (int i = 0; i < n; i++) {
-        if (books[i].title == str || books[i].author == str || books[i].publisher == str || books[i].year == str || books[i].keywords.find(str) != std::string::npos) {
-            cout << books[i].id << endl;
-            out = true;
-        }
+void print_ids(set<int> &ids) {
+    bool flag = false;
+    for (auto it = ids.begin(); it != ids.end(); it++) {
+        printf("%07d\n", *it);
+        flag = true;
     }
-    if (!out) printf("Not Found\n");
+    if (!flag) printf("Not Found\n");
 }
-
-
 
 int main () {
-    int n = 0;
-    cin >> n;
-    getchar();
-    struct Book *books = new struct Book[n];
+    int n = 0, m = 0, k = 0, id = 0, publish_year = 0;
+    string title, author, publisher, keyword;
+    scanf("%d", &n);
+    map<string, set<int>> author_m, title_m, publisher_m, publish_year_m, keyword_m;
     for (int i = 0; i < n; i++) {
-        getline(cin, books[i].id);
-        getline(cin, books[i].title);
-        getline(cin, books[i].author);
-        getline(cin, books[i].keywords);
-        getline(cin, books[i].publisher);
-        getline(cin, books[i].year);
+        scanf("%d", &id);
+        getchar();
+        getline(cin, title);
+        getline(cin, author);
+        while (cin >> keyword) {
+            keyword_m[keyword].insert(id);
+            if (getchar() == '\n') break;
+        }
+        getline(cin, publisher);
+        scanf("%d", &publish_year);
+        author_m[author].insert(id);
+        title_m[title].insert(id);
+        publisher_m[publisher].insert(id);
+        publish_year_m[to_string(publish_year)].insert(id);
     }
     
-    qsort(books, n, sizeof(books[0]), cmp);
-    
-    int m = 0;
-    cin >> m;
+    scanf("%d", &m);
     for (int i = 0; i < m; i++) {
-        int k = 0;
         scanf("%d: ", &k);
-        query(books, k, n);
-    }
+        string str;
+        getline(cin, str);
+        printf("%d: %s\n", k, str.c_str());
+        if (k == 1) {
+            print_ids(title_m[str]);
+        } else if (k == 2) {
+            print_ids(author_m[str]);
+        } else if (k == 3) {
+            print_ids(keyword_m[str]);
+        } else if (k == 4) {
+            print_ids(publisher_m[str]);
+        } else {
+            print_ids(publish_year_m[str]);
+        }
+     }
     
-    delete [] books;
     return 0;
 }
