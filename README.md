@@ -1,1 +1,1 @@
-PAT Practise (中文)真题[https://www.patest.cn/contests/](https://www.patest.cn/contests/)
+PAT Practise (中文)真题[https://pintia.cn/problem-sets/994805342720868352/problems](https://pintia.cn/problem-sets/994805342720868352/problems)
